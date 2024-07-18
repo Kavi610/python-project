@@ -1,0 +1,29 @@
+{% extends 'webapp/base.html'%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h2>Book</h2>
+<form action="{%url 'upload_book' %}" method="POST"  enctype="multipart/form-data">
+    {% csrf_token %} 
+    <input type="file" name="document">
+    <br>
+    <br>
+    <br>
+<table class="table">
+    {% for book in books %}
+        <tr>
+            <td>{{ book.title}}</td>
+            <td>
+                <a href="{{ book.pdf.url}}" class="btn btn-primary btn-sm">
+                    Download pdf
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+ <button type="submit" class="btn btn-primary w-100 btn-block p-2">Upload file</button> 
+</form>
+{% endblock %}
+
